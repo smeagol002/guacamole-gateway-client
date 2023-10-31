@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { WebSocketTunnel } from "guacamole-common-ts";
 import * as FileSaver from "file-saver";
 
-import { RemoteDesktopService, TunnelRestApiService } from "remote-desktop";
 import { MatDialog } from "@angular/material/dialog";
 import { ClipboardModalComponent } from "./components/clipboard-modal.component";
+import { RemoteDesktopService, TunnelRestApiService, common } from "../../projects/remote-desktop/src/public-api";
 
 @Component({
   selector: "app-root",
@@ -76,7 +75,7 @@ export class AppComponent implements OnInit {
 
     // Setup tunnel. The tunnel can be either: WebsocketTunnel, HTTPTunnel or ChainedTunnel
     //const tunnel = new WebSocketTunnel("ws://localhost:4200/be/websocket-tunnel");
-    const tunnel = new WebSocketTunnel("ws://localhost:4567/websocket-tunnel")
+    const tunnel = new common.WebSocketTunnel("ws://localhost:4567/websocket-tunnel")
     this.tunnelRestApiService.initialize("http://localhost:4567")
     this.remoteDesktopService.initialize(tunnel);
 
@@ -99,7 +98,6 @@ export class AppComponent implements OnInit {
       "password": "testuser",
       "scheme": "vnc",
       "port": "59000",
-      "enable-sftp": "true",
       "sftp-hostname": "192.168.1.10",
       "sftp-port": "2222",
       "sftp-username": "testuser",

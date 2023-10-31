@@ -3,12 +3,13 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
+    "esModuleInterop": true,
     "types": [
       "jasmine"
     ]
   },
   "files": [
-    "src/test.ts"
+    "src/test.ts",
   ],
   "include": [
     "**/*.spec.ts",

@@ -4,10 +4,10 @@ import {Component} from '@angular/core';
  * Status bar item component
  */
 @Component({
-  selector: 'guacamole-rd-ts-status-bar-item',
+  selector: 'guacamole-gateway-client-status-bar-item',
   template: `<ng-content></ng-content>`,
   host: {
-    class: 'guacamole-rd-ts-status-bar-item',
+    class: 'guacamole-gateway-client-status-bar-item',
   },
 })
 export class StatusBarItemComponent {}

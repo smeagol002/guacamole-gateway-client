@@ -1,8 +1,8 @@
-#guacamole-rd-ts 
+#guacamole-gateway-client 
 
-This is a remote desktop Angular 15+ component for connecting to nodejs [guacamole-lite-ts gateway](https://www.npmjs.com/package/guacamole-lite-ts)
+This is a remote desktop Angular 15+ component for connecting to nodejs [guacamole-gateway-ts gateway](https://www.npmjs.com/package/guacamole-gateway-ts)
 
-This is based off a previous work of raytecvision with little tweaks to make it work with guacamole-lite-ts gateway.
+This is based off a previous work of raytecvision with little tweaks to make it work with guacamole-gateway-ts gateway.
 The work on this repo is highly experimental, and I have no prior experience on publishing packages to npm. Take this repo with a grain of salt.
 
 ##Code scaffolding
@@ -14,18 +14,18 @@ Note: Don't forget to add --project remote-desktop or else it will be added to t
 Run ng build remote-desktop to build the project. The build artifacts will be stored in the dist/ directory.
 
 
-![Alt text](https://github.com/smeagol002/guacamole-rd-ts/blob/main/src/assets/RemoteDesktop.png?raw=true)
+![Alt text](https://github.com/smeagol002/guacamole-gateway-client/blob/develop/src/assets/RemoteDesktop.png?raw=true)
 
 
 
 ## Install
- - `npm i guacamole-rd-ts guacamole-common-ts`
+ - `npm i guacamole-gateway-client guacamole-common-ts`
 
 ```typescript remote-desktop.module.ts
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RemoteDesktopComponent } from './remote-desktop.component';
-import { GuacamoleRemoteDesktopModule } from 'guacamole-rd-ts';
+import { GuacamoleRemoteDesktopModule } from 'guacamole-gateway-client';
 
 @NgModule({
   declarations: [ RemoteDesktopComponent, ],
@@ -43,52 +43,52 @@ export class RemoteDesktopModule { }
 
  ```html remote-desktop.html test
   <div>
-      <guacamole-rd-ts #remoteDesktop [showFileManager]="fileManagerVisible">
+      <guacamole-gateway-client #remoteDesktop [showFileManager]="fileManagerVisible">
       <!-- Toolbar items -->
-      <guacamole-rd-ts-toolbar-item *ngIf="rdService.isConnected()" (click)="handleTakeScreenshot()">
+      <guacamole-gateway-client-toolbar-item *ngIf="rdService.isConnected()" (click)="handleTakeScreenshot()">
         Take screenshot
-      </guacamole-rd-ts-toolbar-item>
-      <guacamole-rd-ts-toolbar-item *ngIf="rdService.isConnected()" (click)="handleClipboard()">
+      </guacamole-gateway-client-toolbar-item>
+      <guacamole-gateway-client-toolbar-item *ngIf="rdService.isConnected()" (click)="handleClipboard()">
         Clipboard
-      </guacamole-rd-ts-toolbar-item>
-      <guacamole-rd-ts-toolbar-item *ngIf="rdService.isConnected()" (click)="toggleFileManager()">
+      </guacamole-gateway-client-toolbar-item>
+      <guacamole-gateway-client-toolbar-item *ngIf="rdService.isConnected()" (click)="toggleFileManager()">
         File Manager
-      </guacamole-rd-ts-toolbar-item>
-      <guacamole-rd-ts-toolbar-item *ngIf="rdService.isConnected()" (click)="handleDisconnect()">
+      </guacamole-gateway-client-toolbar-item>
+      <guacamole-gateway-client-toolbar-item *ngIf="rdService.isConnected()" (click)="handleDisconnect()">
         Disconnect
-      </guacamole-rd-ts-toolbar-item>
-      <guacamole-rd-ts-toolbar-item *ngIf="!rdService.isFullScreen() && rdService.isConnected()" (click)="handleEnterFullScreen()">
+      </guacamole-gateway-client-toolbar-item>
+      <guacamole-gateway-client-toolbar-item *ngIf="!rdService.isFullScreen() && rdService.isConnected()" (click)="handleEnterFullScreen()">
         Enter full screen
-      </guacamole-rd-ts-toolbar-item>
-      <guacamole-rd-ts-toolbar-item *ngIf="rdService.isFullScreen() && rdService.isConnected()" (click)="handleExitFullScreen()">
+      </guacamole-gateway-client-toolbar-item>
+      <guacamole-gateway-client-toolbar-item *ngIf="rdService.isFullScreen() && rdService.isConnected()" (click)="handleExitFullScreen()">
         Exit full screen
-      </guacamole-rd-ts-toolbar-item>
+      </guacamole-gateway-client-toolbar-item>
   
 
       <!-- Override connection state messages -->
-      <guacamole-rd-ts-connecting-message>
-        <div class="guacamole-rd-ts-message-title guacamole-rd-ts-message-title-success">
+      <guacamole-gateway-client-connecting-message>
+        <div class="guacamole-gateway-client-message-title guacamole-gateway-client-message-title-success">
           CONNECTING TO REMOTE DESKTOP
         </div>
-        <div class="guacamole-rd-ts-message-body">
+        <div class="guacamole-gateway-client-message-body">
           Attempting to connect to the remote desktop. Waiting for response...
         </div>
-      </guacamole-rd-ts-connecting-message>
+      </guacamole-gateway-client-connecting-message>
 
       <!-- Status bar -->
-      <guacamole-rd-ts-status-bar *ngIf="rdService.isConnected()">
-        <guacamole-rd-ts-status-bar-item>
+      <guacamole-gateway-client-status-bar *ngIf="rdService.isConnected()">
+        <guacamole-gateway-client-status-bar-item>
           You are currently connected to: <strong>Machine 1</strong>
-        </guacamole-rd-ts-status-bar-item>
-        <guacamole-rd-ts-status-bar-item>
+        </guacamole-gateway-client-status-bar-item>
+        <guacamole-gateway-client-status-bar-item>
           <span>Need help? Look at our <a href="#">documentation</a></span>
-        </guacamole-rd-ts-status-bar-item>
-      </guacamole-rd-ts-status-bar>
+        </guacamole-gateway-client-status-bar-item>
+      </guacamole-gateway-client-status-bar>
 
       <!-- File Manager -->
-      <guacamole-rd-ts-file-manager *ngIf="rdService.isConnected()">
-      </guacamole-rd-ts-file-manager>
-    </guacamole-rd-ts>
+      <guacamole-gateway-client-file-manager *ngIf="rdService.isConnected()">
+      </guacamole-gateway-client-file-manager>
+    </guacamole-gateway-client>
   </div>
  ```
 
@@ -96,7 +96,7 @@ export class RemoteDesktopModule { }
  
  import { Component, ViewEncapsulation, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { WebSocketTunnel } from 'guacamole-common-ts';
-import { RemoteDesktopService, TunnelRestApiService, GuacamoleRemoteDesktopComponent, guac_params, guac_token_params } from 'guacamole-rd-ts';
+import { RemoteDesktopService, TunnelRestApiService, GuacamoleRemoteDesktopComponent, guac_params, guac_token_params } from 'guacamole-gateway-client';
 
 @Component({
   selector: 'remote-desktop',
@@ -160,7 +160,7 @@ export class RemoteDesktopComponent implements OnInit, AfterViewInit {
     /**
       * 2 Methods below.
       *
-      * 1 is authentication handled at the gateway guacamole-lite-ts and browser is agnostic
+      * 1 is authentication handled at the gateway guacamole-gateway-ts and browser is agnostic
       * to the connection parameters. This is useful if you have all the data at the gateway.
       *
       * 2 is simpler as you can see the connection parameters here. 
@@ -209,7 +209,7 @@ export class RemoteDesktopComponent implements OnInit, AfterViewInit {
 
  ## Associated Components
 
- [guacamole-lite-ts](https://www.npmjs.com/package/guacamole-lite-ts)
+ [guacamole-gateway-ts](https://www.npmjs.com/package/guacamole-gateway-ts)
 
  [guacamole-common-ts](https://www.npmjs.com/package/guacamole-common-ts)
 

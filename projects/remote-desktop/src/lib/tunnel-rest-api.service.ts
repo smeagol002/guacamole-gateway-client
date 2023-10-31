@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
-import {InputStream, OutputStream, Status} from 'guacamole-common-ts';
 import {DOCUMENT} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {take} from 'rxjs/operators';
+import { InputStream, OutputStream, Status } from 'guacamole-common-ts';
 
 /**
  * The number of milliseconds to wait after a stream download has completed
@@ -155,7 +155,7 @@ export class TunnelRestApiService {
    *     The UUID of the tunnel associated with the Guacamole connection
    *     whose stream should be downloaded as a file.
    *
-   * @param {Guacamole.InputStream} stream
+   * @param {InputStream} stream
    *     The stream whose contents should be downloaded.
    *
    * @param {String} mimetype
@@ -225,7 +225,7 @@ export class TunnelRestApiService {
    *     The UUID of the tunnel associated with the Guacamole connection
    *     whose stream should receive the given file.
    *
-   * @param {Guacamole.OutputStream} stream
+   * @param {OutputStream} stream
    *     The stream that should receive the given file.
    *
    * @param {File} file

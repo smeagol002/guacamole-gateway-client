@@ -10,7 +10,7 @@ $guacamole-rd-ts-background-color: #ffffff;
 $guacamole-rd-ts-status-bar-background-color: #272a31;
 $guacamole-rd-ts-status-bar-border-color: #131418;
 
-.guacamole-rd-ts {
+.guacamole-gateway-client {
   font-family: $guacamole-rd-ts-font-family;
   background: $guacamole-rd-ts-background-color;
   width: 100%;
@@ -20,11 +20,11 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
   display: flex;
   overflow: hidden;
 
-  .guacamole-rd-ts-status-bar-hidden {
+  .guacamole-gateway-client-status-bar-hidden {
     display: none;
   }
 
-  .guacamole-rd-ts-status-bar {
+  .guacamole-gateway-client-status-bar {
     flex: 0 0 20px;
     height: 20px;
     width: 100%;
@@ -55,12 +55,12 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
       outline: none;
     }
 
-    .guacamole-rd-ts-status-bar {
+    .guacamole-gateway-client-status-bar {
       flex: 1;
     }
   }
 
-  .guacamole-rd-ts-toolbar {
+  .guacamole-gateway-client-toolbar {
     flex: 0 0 35px;
     height: 35px;
     width: 100%;
@@ -70,7 +70,7 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
     background: $guacamole-rd-ts-toolbar-background-color;
     font-weight: 700;
 
-    &.guacamole-rd-ts-toolbar-fullscreen {
+    &.guacamole-gateway-client-toolbar-fullscreen {
       position: absolute;
       top: 0px;
       left: 0;
@@ -79,7 +79,7 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
       z-index: 1000;
       flex-flow: column wrap;
 
-      .guacamole-rd-ts-toolbar-items {
+      .guacamole-gateway-client-toolbar-items {
         flex-direction: column;
       }
 
@@ -87,14 +87,14 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
       border-bottom: none;
     }
 
-    .guacamole-rd-ts-toolbar-items {
+    .guacamole-gateway-client-toolbar-items {
       display: flex;
       flex-direction: row;
       padding-left: 0;
       margin-bottom: 0;
       list-style: none;
 
-      .guacamole-rd-ts-toolbar-item {
+      .guacamole-gateway-client-toolbar-item {
         line-height: 0px;
         text-align: center;
         text-decoration: none;
@@ -111,13 +111,13 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
     }
   }
 
-  .guacamole-rd-ts-container {
+  .guacamole-gateway-client-container {
     display: flex;
     flex: 1;
     flex-direction: column;
     overflow: hidden;
 
-    .guacamole-rd-ts-viewport {
+    .guacamole-gateway-client-viewport {
       border: 1px solid $guacamole-rd-ts-viewport-background-color;
       position: relative;
       display: flex;
@@ -129,7 +129,7 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
       background: $guacamole-rd-ts-viewport-background-color;
     }
 
-    .guacamole-rd-ts-message {
+    .guacamole-gateway-client-message {
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -137,7 +137,7 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
       padding: 20px;
       word-wrap: break-word;
 
-      .guacamole-rd-ts-message-title {
+      .guacamole-gateway-client-message-title {
         margin-bottom: 0.75rem;
         font-size: 1.25rem;
 
@@ -150,8 +150,8 @@ $guacamole-rd-ts-status-bar-border-color: #131418;
         }
       }
 
-      .guacamole-rd-ts-message-body {
-        .guacamole-rd-ts-message-body-btn {
+      .guacamole-gateway-client-message-body {
+        .guacamole-gateway-client-message-body-btn {
           cursor: pointer;
           color: #212529;
           background-color: #e2e6ea;

@@ -27,31 +27,31 @@ import {ManagedFilesystemService} from '../managed-filesystem.service';
  * The main component for displaying a remote desktop
  */
 @Component({
-  selector: 'guacamole-rd-ts',
+  selector: 'guacamole-gateway-client',
   template: `
-    <div class="guacamole-rd-ts" #container>
+    <div class="guacamole-gateway-client" #container>
       <!-- Toolbar items template -->
       <ng-template #toolbarItems>
-        <ul class="guacamole-rd-ts-toolbar-items">
+        <ul class="guacamole-gateway-client-toolbar-items">
           <ng-content
-            select="guacamole-rd-ts-toolbar-item[align=left]"
+            select="guacamole-gateway-client-toolbar-item[align=left]"
           ></ng-content>
         </ul>
-        <ul class="guacamole-rd-ts-toolbar-items">
+        <ul class="guacamole-gateway-client-toolbar-items">
           <ng-content
-            select="guacamole-rd-ts-toolbar-item[align=right]"
+            select="guacamole-gateway-client-toolbar-item[align=right]"
           ></ng-content>
         </ul>
       </ng-template>
 
       <!-- Normal toolbar -->
-      <nav class="guacamole-rd-ts-toolbar" *ngIf="!remoteDesktopService.isFullScreen()">
+      <nav class="guacamole-gateway-client-toolbar" *ngIf="!remoteDesktopService.isFullScreen()">
         <template [ngTemplateOutlet]="toolbarItems"></template>
       </nav>
 
       <!-- Full screen toolbar -->
       <nav
-        class="guacamole-rd-ts-toolbar guacamole-rd-ts-toolbar-fullscreen"
+        class="guacamole-gateway-client-toolbar guacamole-gateway-client-toolbar-fullscreen"
         *ngIf="remoteDesktopService.isFullScreen()"
         [@toolbarAnimation]="toolbarVisible"
         #toolbar
@@ -59,31 +59,31 @@ import {ManagedFilesystemService} from '../managed-filesystem.service';
         <template [ngTemplateOutlet]="toolbarItems"></template>
       </nav>
 
-      <section class="guacamole-rd-ts-container">
+      <section class="guacamole-gateway-client-container">
         <!-- Connecting message -->
         <div *ngIf="(state | async) === states.CONNECTING">
-          <div class="guacamole-rd-ts-message" *ngIf="connectingMessage">
+          <div class="guacamole-gateway-client-message" *ngIf="connectingMessage">
             <ng-content
-              select="guacamole-rd-ts-connecting-message"
+              select="guacamole-gateway-client-connecting-message"
             ></ng-content>
           </div>
-          <guacamole-rd-ts-message
+          <guacamole-gateway-client-message
             *ngIf="!connectingMessage"
             title="Connecting to remote desktop"
             message="Attempting to connect to the remote desktop. Waiting for response..."
             type="success"
           >
-          </guacamole-rd-ts-message>
+          </guacamole-gateway-client-message>
         </div>
 
         <!-- Disconnected message -->
         <div *ngIf="(state | async) === states.DISCONNECTED">
-          <div class="guacamole-rd-ts-message" *ngIf="disconnectedMessage">
+          <div class="guacamole-gateway-client-message" *ngIf="disconnectedMessage">
             <ng-content
-              select="guacamole-rd-ts-disconnected-message"
+              select="guacamole-gateway-client-disconnected-message"
             ></ng-content>
           </div>
-          <guacamole-rd-ts-message
+          <guacamole-gateway-client-message
             *ngIf="!disconnectedMessage"
             title="Disconnected"
             message="The connection to the remote desktop terminated successfully"
@@ -91,20 +91,20 @@ import {ManagedFilesystemService} from '../managed-filesystem.service';
           >
             <button
               (click)="remoteDesktopService.onReconnect.next(true)"
-              class="guacamole-rd-ts-message-body-btn"
+              class="guacamole-gateway-client-message-body-btn"
             >
               Reconnect
             </button>
-          </guacamole-rd-ts-message>
+          </guacamole-gateway-client-message>
         </div>
 
         <!-- Error message -->
         <div *ngIf="(state | async) === states.ERROR">
-          <div class="guacamole-rd-ts-message" *ngIf="errorMessage">
-            <ng-content select="guacamole-rd-ts-error-message"></ng-content>
+          <div class="guacamole-gateway-client-message" *ngIf="errorMessage">
+            <ng-content select="guacamole-gateway-client-error-message"></ng-content>
           </div>
 
-          <guacamole-rd-ts-message
+          <guacamole-gateway-client-message
             *ngIf="!errorMessage"
             title="Connection error"
             message="The remote desktop server is currently unreachable."
@@ -112,24 +112,24 @@ import {ManagedFilesystemService} from '../managed-filesystem.service';
           >
             <button
               (click)="remoteDesktopService.onReconnect.next(true)"
-              class="guacamole-rd-ts-message-body-btn"
+              class="guacamole-gateway-client-message-body-btn"
             >
               Connect
             </button>
-          </guacamole-rd-ts-message>
+          </guacamole-gateway-client-message>
         </div>
 
         <!-- Display -->
-        <guacamole-rd-ts-display
+        <guacamole-gateway-client-display
           *ngIf="(state | async) === states.CONNECTED"
           [manager]="remoteDesktopService"
           (onMouseMove)="handleDisplayMouseMove($event)"
         >
-        </guacamole-rd-ts-display>
+        </guacamole-gateway-client-display>
 
         <!-- File manager -->
         <div class="file-manager-dialog" [class.show]="showFileManager">
-          <ng-content select="guacamole-rd-ts-file-manager"></ng-content>
+          <ng-content select="guacamole-gateway-client-file-manager"></ng-content>
         </div>
 
         <!-- File transfers -->
@@ -141,7 +141,7 @@ import {ManagedFilesystemService} from '../managed-filesystem.service';
 
 
       <section
-        [class.guacamole-rd-ts-status-bar-hidden]="remoteDesktopService.isFullScreen()"
+        [class.guacamole-gateway-client-status-bar-hidden]="remoteDesktopService.isFullScreen()"
       >
 
       </section>

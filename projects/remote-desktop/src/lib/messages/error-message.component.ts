@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'guacamole-rd-ts-error-message',
-    host: { class: 'guacamole-rd-ts-message'},
+    selector: 'guacamole-gateway-client-error-message',
+    host: { class: 'guacamole-gateway-client-message'},
     template: `
         <ng-content></ng-content>
     `

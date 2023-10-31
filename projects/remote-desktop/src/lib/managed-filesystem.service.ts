@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Client, JSONReader, Object, Status, Tunnel} from 'guacamole-common-ts';
 import {File, FileType, ManagedFilesystem} from './managed-filesystem';
 import {TunnelRestApiService} from './tunnel-rest-api.service';
+import { Client, Tunnel, Object, Status, JSONReader } from 'guacamole-common-ts';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ManagedFilesystemService {
   }
 
   /**
-   * Creates a new ManagedFilesystem instance from the given Guacamole.Object
+   * Creates a new ManagedFilesystem instance from the given Object
    * and human-readable name. Upon creation, a request to populate the
    * contents of the root directory will be automatically dispatched.
    *
@@ -24,7 +24,7 @@ export class ManagedFilesystemService {
    *     that resulted in the creation of this ManagedFilesystem.
    *
    * @param object
-   *     The Guacamole.Object defining the filesystem.
+   *     The Object defining the filesystem.
    *
    * @param name
    *     A human-readable name for the filesystem.

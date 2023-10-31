@@ -11,15 +11,15 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import {Client, Display, Keyboard, Mouse} from 'guacamole-common-ts';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {RemoteDesktopService} from '../remote-desktop.service';
+import { Client, Display, Keyboard, Mouse } from 'guacamole-common-ts';
 
 @Component({
-  selector: 'guacamole-rd-ts-display',
-  host: { class: 'guacamole-rd-ts-viewport' },
+  selector: 'guacamole-gateway-client-display',
+  host: { class: 'guacamole-gateway-client-viewport' },
   template: `
-      <div class="guacamole-rd-ts-display" #display>
+      <div class="guacamole-gateway-client-display" #display>
       </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -220,9 +220,9 @@ export class DisplayComponent implements OnInit, OnDestroy, AfterViewChecked {
    */
   private createDisplayInputs(): void {
       const display = this.display.nativeElement.children[0];
-      this.mouse = new Mouse(display);
-      this.touch = new Mouse.Touchscreen(display);
-      this.keyboard = new Keyboard(window.document);
+    this.mouse = new Mouse(display);
+    this.touch = new Mouse.Touchscreen(display);
+    this.keyboard = new Keyboard(window.document);
   }
 
   /**
@@ -232,7 +232,7 @@ export class DisplayComponent implements OnInit, OnDestroy, AfterViewChecked {
   private handleMouseState(mouseState: any): void {
       const display = this.getDisplay();
       const scale = display.getScale();
-      const scaledState = new Mouse.State(
+    const scaledState = new Mouse.State(
           mouseState.x / scale,
           mouseState.y / scale,
           mouseState.left,

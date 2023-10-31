@@ -5,17 +5,17 @@ import {Component, Input} from '@angular/core';
  * state changes
  */
 @Component({
-  selector: 'guacamole-rd-ts-message',
+  selector: 'guacamole-gateway-client-message',
   template: `
-    <div class="guacamole-rd-ts-message">
+    <div class="guacamole-gateway-client-message">
       <div
-        class="guacamole-rd-ts-message-title"
-        [class.guacamole-rd-ts-message-title-success]="type === 'success'"
-        [class.guacamole-rd-ts-message-title-error]="type === 'error'"
+        class="guacamole-gateway-client-message-title"
+        [class.guacamole-gateway-client-message-title-success]="type === 'success'"
+        [class.guacamole-gateway-client-message-title-error]="type === 'error'"
       >
         {{ title | uppercase }}
       </div>
-      <div class="guacamole-rd-ts-message-body">
+      <div class="guacamole-gateway-client-message-body">
         <p>{{ message }}</p>
         <ng-content></ng-content>
       </div>

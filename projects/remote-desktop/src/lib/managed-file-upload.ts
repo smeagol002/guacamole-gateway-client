@@ -1,3 +1,5 @@
+import { Status } from "guacamole-common-ts";
+
 /**
  * Object which serves as a surrogate interface, encapsulating a Guacamole
  * file upload while it is active, allowing it to be detached and
@@ -8,8 +10,6 @@
  *     The object whose properties should be copied within the new
  *     ManagedFileUpload.
  */
-import {Status} from 'guacamole-common-ts';
-
 export class ManagedFileUpload {
   /**
    * The mimetype of the file being transferred.
@@ -69,9 +69,9 @@ export class ManagedFileTransferState {
   /**
    * The status code of the current error condition, if streamState
    * is ERROR. For all other streamState values, this will be
-   * @link{Guacamole.Status.Code.SUCCESS}.
+   * @link{Status.Code.SUCCESS}.
    *
-   * @default Guacamole.Status.Code.SUCCESS
+   * @default Status.Code.SUCCESS
    */
   statusCode: number;
 
@@ -91,7 +91,7 @@ export class ManagedFileTransferState {
    *
    * @param [statusCode]
    *     The status code to assign to the given ManagedFileTransferState, if
-   *     any, as listed within Guacamole.Status.Code. If no status code is
+   *     any, as listed within Status.Code. If no status code is
    *     specified, the status code of the ManagedFileTransferState is not
    *     touched.
    */

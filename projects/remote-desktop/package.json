@@ -2,12 +2,6 @@
   "name": "guacamole-gateway-client",
   "description": "Guacamole Gateway Remote Desktop Client Angular 15+ module that implements the guacamole protocol utilizing guacamole-gateway-ts",
   "license": "MIT",
-
-  "scripts": {
-    "ng": "ng",
-    "build-dev": "ng build remote-desktop && npm publish ./dist/remote-desktop --tage=develop",
-    "build": "ng build remote-desktop && npm publish ./dist/remote-desktop"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smeagol002/guacamole-gateway-client.git"
@@ -17,12 +11,13 @@
     "url": "https://github.com/smeagol002/guacamole-gateway-client"
   },
   "homepage": "https://github.com/smeagol002/guacamole-gateway-client#readme",
-  "version": "0.0.1-beta",
+  "version": "0.0.1-beta2",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0",
     "screenfull": "^5.1.0",
-    "socket.io-client": "^4.7.2"
+    "socket.io-client": "^4.7.2",
+    "guacamole-common-ts": "^0.1.7-beta3"
   },
   "dependencies": {
     "tslib": "^2.0.0"

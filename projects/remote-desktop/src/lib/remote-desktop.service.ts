@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpParams} from '@angular/common/http';
-import {Client, InputStream, Object, Status, StringReader, Tunnel} from 'guacamole-common-ts';
 import {BehaviorSubject, ReplaySubject, Subject, Observable} from 'rxjs';
 import {File as ManagedFile, FileType, ManagedFilesystem} from './managed-filesystem';
 import {ManagedFilesystemService} from './managed-filesystem.service';
 import {ManagedFileTransferState, ManagedFileUpload, StreamState} from './managed-file-upload';
 import { TunnelRestApiService } from './tunnel-rest-api.service';
+import { Client, Tunnel, Object, Status, StringReader, InputStream } from 'guacamole-common-ts';
+export * as Guacamole from 'guacamole-common-ts';
 
 /**
  * Manages the connection to the remote desktop
@@ -469,7 +470,7 @@ export class RemoteDesktopService {
 
   /**
    * Build the URL query parameters to send to the tunnel connection
-   * @param parameters guacamole-lite-ts format
+   * @param parameters guacamole-gateway-ts format
    *
    */
   private buildParameters(parameters: guac_params): string {
@@ -541,7 +542,7 @@ export class RemoteDesktopService {
   /**
    * Handle any tunnel errors by disconnecting and updating the connection state
    * @param status Status received from the tunnel
-   * See https://guacamole.apache.org/doc/gug/protocol-reference.html for error reference
+   * See https://apache.org/doc/gug/protocol-reference.html for error reference
    */
   private handleTunnelError(status: any): void {
     this.disconnect();
@@ -952,7 +953,7 @@ export interface common_setting {
   
       Guacamole can provide file transfer over SFTP even when the remote desktop is otherwise being accessed through a different protocol, 
       like VNC or RDP. If SFTP is enabled on a Guacamole RDP connection, users will be able to upload and download files as described in Using 
-      Guacamole.
+      
 
       This support is independent of the file transfer that may be provided by the protocol in use, like RDP’s own “drive redirection” (RDPDR), 
       and is particularly useful for remote desktop servers which do not support file transfer features.
@@ -976,7 +977,7 @@ export interface common_setting {
    * The known hosts entry for the SFTP server. This parameter is optional, and, if not provided, no verification of SFTP host identity will be done. If the parameter is provided the identity of the server will be checked against the data.
    *
    * The format of this parameter is that of a single entry from an OpenSSH known_hosts file.
-   * For more information, please see [SSH Host Verification](https://guacamole.incubator.apache.org/doc/gug/configuring-guacamole.html#ssh-host-verification).
+   * For more information, please see [SSH Host Verification](https://incubator.apache.org/doc/gug/configuring-html#ssh-host-verification).
   */
   "sftp-host-key"?: string;
   /**
@@ -1000,7 +1001,7 @@ export interface common_setting {
   */
   "sftp-directory"?: string;
   /**
-   * The directory to expose to connected users via Guacamole’s [Using the file browser](https://guacamole.incubator.apache.org/doc/gug/using-guacamole.html#file-browser). If omitted, the root directory will be used by default.
+   * The directory to expose to connected users via Guacamole’s [Using the file browser](https://incubator.apache.org/doc/gug/using-html#file-browser). If omitted, the root directory will be used by default.
   */
   "sftp-root-directory"?: string;
   /**
@@ -1148,17 +1149,17 @@ export interface common_setting {
       If Guacamole is being used in part to automate an SSH, telnet, or other terminal session, it can be useful to provide 
       input directly from JavaScript as a raw stream of data, rather than attempting to translate data into keystrokes. 
       This can be done through opening a pipe stream named “STDIN” within the connection using the createPipeStream() 
-      function of Guacamole.Client:
+      function of Client:
 
       ```
       var outputStream = client.createPipeStream('text/plain', 'STDIN');
       ```
 
-      The resulting Guacamole.OutputStream can then be used to stream data directly to the input of the terminal session, as if typed by the user:
+      The resulting OutputStream can then be used to stream data directly to the input of the terminal session, as if typed by the user:
 
       ```
       // Wrap output stream in writer
-      var writer = new Guacamole.StringWriter(outputStream);
+      var writer = new StringWriter(outputStream);
 
       // Send text
       writer.sendText("hello");
@@ -1180,7 +1181,7 @@ export interface common_setting {
    *   background: rgb:ff/ff/ff;
    *   color9: rgb:80/00/80
    *   ```
-   * This format is similar to the color configuration format used by Xterm, so Xterm color configurations can be easily adapted for Guacamole. This parameter is optional. If not specified, Guacamole will render text as gray over a black background.
+   * This format is similar to the color configuration format used by Xterm, so Xterm color configurations can be easily adapted for  This parameter is optional. If not specified, Guacamole will render text as gray over a black background.
    * 
    * Possible color names are:
    *   foreground
@@ -1620,7 +1621,7 @@ export type guac_token_params = vncGuacLiteOptions | rdpGuacLiteOptions | sshGua
 
 export interface guac_params extends vnc_unencrypted_settings,  ssh_unencrypted_settings, rdp_unencrypted_settings, telnet_unencrypted_settings, kubernetes_unencrypted_settings {
   /** For all custom fields.
-   * Typically these fields would be used in the callback function on guacamole-lite-ts server
+   * Typically these fields would be used in the callback function on guacamole-gateway-ts server
    */
   [x: string]: any;  
 }

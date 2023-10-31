@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'guacamole-rd-ts-status-bar',
+  selector: 'guacamole-gateway-client-status-bar',
   template: `<ng-content
-    select="guacamole-rd-ts-status-bar-item"
+    select="guacamole-gateway-client-status-bar-item"
   ></ng-content>`,
   host: {
-    class: 'guacamole-rd-ts-status-bar',
+    class: 'guacamole-gateway-client-status-bar',
   },
 })
 export class StatusBarComponent {}

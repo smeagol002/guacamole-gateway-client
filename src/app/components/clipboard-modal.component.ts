@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { RemoteDesktopService } from 'remote-desktop';
+import { RemoteDesktopService } from '../../../projects/remote-desktop/src/public-api';
 
 export interface DialogData {
     manager: RemoteDesktopService;
