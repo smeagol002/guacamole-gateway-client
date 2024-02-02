@@ -1,0 +1,49 @@
+
+<div class="vdi-container">
+<guacamole-gateway-client [showFileManager]="fileManagerVisible">
+    <!-- Toolbar items -->
+    <guacamole-gateway-client-toolbar-item *ngIf="remoteDesktopService.isConnected()" (click)="handleTakeScreenshot()" align="left" >
+      Take screenshot
+    </guacamole-gateway-client-toolbar-item>
+    <guacamole-gateway-client-toolbar-item *ngIf="remoteDesktopService.isConnected()" (click)="handleClipboard()" align="left" >
+      Clipboard
+    </guacamole-gateway-client-toolbar-item>
+    <guacamole-gateway-client-toolbar-item *ngIf="remoteDesktopService.isConnected()" (click)="toggleFileManager()" align="left" >
+      File Manager
+    </guacamole-gateway-client-toolbar-item>
+    <guacamole-gateway-client-toolbar-item *ngIf="remoteDesktopService.isConnected()" (click)="handleDisconnect()" align="right">
+      Disconnect
+    </guacamole-gateway-client-toolbar-item>
+    <guacamole-gateway-client-toolbar-item *ngIf="!remoteDesktopService.isFullScreen() && remoteDesktopService.isConnected()" (click)="handleEnterFullScreen()" align="right">
+      Enter full screen
+    </guacamole-gateway-client-toolbar-item>
+    <guacamole-gateway-client-toolbar-item *ngIf="remoteDesktopService.isFullScreen() && remoteDesktopService.isConnected()" (click)="handleExitFullScreen()" align="right">
+      Exit full screen
+    </guacamole-gateway-client-toolbar-item>
+
+    <!-- Override connection state messages -->
+    <guacamole-gateway-client-connecting-message>
+      <div class="guacamole-gateway-client-message-title guacamole-gateway-client-message-title-success">
+        CONNECTING TO REMOTE DESKTOP
+      </div>
+      <div class="guacamole-gateway-client-message-body">
+        Attempting to connect to the remote desktop. Waiting for response...
+      </div>
+    </guacamole-gateway-client-connecting-message>
+
+    <!-- Status bar -->
+    <guacamole-gateway-client-status-bar *ngIf="remoteDesktopService.isConnected()">
+      <guacamole-gateway-client-status-bar-item>
+          You are currently connected to: <strong>Machine 1</strong>
+      </guacamole-gateway-client-status-bar-item>
+      <guacamole-gateway-client-status-bar-item>
+          <span>Need help? Look at our <a href="#">documentation</a></span>
+      </guacamole-gateway-client-status-bar-item>
+    </guacamole-gateway-client-status-bar>
+
+    <!-- File Manager -->
+    <guacamole-gateway-client-file-manager *ngIf="remoteDesktopService.isConnected()">
+    </guacamole-gateway-client-file-manager>
+  </guacamole-gateway-client>
+</div>
+
