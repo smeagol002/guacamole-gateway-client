@@ -482,7 +482,7 @@ export class RemoteDesktopService {
    * Bind the client and tunnel event handlers
    */
   private bindEventHandlers(): void {
-    // console.log('Binding events');
+     console.log('Binding events');
     this.client.onerror = this.handleClientError.bind(this);
     this.client.onstatechange = this.handleClientStateChange.bind(this);
     this.client.onclipboard = this.handleClipboard.bind(this);

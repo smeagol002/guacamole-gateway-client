@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {File, FileType, ManagedFilesystem} from './managed-filesystem';
 import {TunnelRestApiService} from './tunnel-rest-api.service';
-import { Client, Tunnel, Object, Status, JSONReader } from 'guacamole-common-ts';
+import { Client, JSONReader, Object, Status, Tunnel } from 'guacamole-common-ts';
 
 @Injectable({
   providedIn: 'root'

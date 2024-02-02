@@ -3,7 +3,6 @@
 This is a remote desktop Angular 15+ component for connecting to nodejs [guacamole-gateway-ts gateway](https://www.npmjs.com/package/guacamole-gateway-ts)
 
 This is based off a previous work of raytecvision with little tweaks to make it work with guacamole-gateway-ts gateway.
-The work on this repo is highly experimental, and I have no prior experience on publishing packages to npm. Take this repo with a grain of salt.
 
 ##Code scaffolding
 Run ng generate component component-name --project remote-desktop to generate a new component. You can also use ng generate directive|pipe|service|class|guard|interface|enum|module --project remote-desktop.
@@ -14,12 +13,13 @@ Note: Don't forget to add --project remote-desktop or else it will be added to t
 Run ng build remote-desktop to build the project. The build artifacts will be stored in the dist/ directory.
 
 
-![Alt text](https://github.com/smeagol002/guacamole-gateway-client/blob/develop/src/assets/RemoteDesktop.png?raw=true)
+This diagram describes the architecture of Guacamole and the role of *guacamole-gateway-ts* in it:
+![Chart](https://github.com/smeagol002/assets/blob/main/pictures/RemoteDesktop.jpg?raw=true)
 
 
 
 ## Install
- - `npm i guacamole-gateway-client guacamole-common-ts`
+ - `npm i guacamole-gateway-client`
 
 ```typescript remote-desktop.module.ts
 import { NgModule } from '@angular/core';
@@ -94,9 +94,8 @@ export class RemoteDesktopModule { }
 
  ```typescript remote-desktop.component.ts
  
- import { Component, ViewEncapsulation, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { WebSocketTunnel } from 'guacamole-common-ts';
-import { RemoteDesktopService, TunnelRestApiService, GuacamoleRemoteDesktopComponent, guac_params, guac_token_params } from 'guacamole-gateway-client';
+import { Component, ViewEncapsulation, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Guacamole, GuacamoleRemoteDesktopComponent, RemoteDesktopService, TunnelRestApiService } from 'guacamole-gateway-client';
 
 @Component({
   selector: 'remote-desktop',
@@ -106,13 +105,13 @@ import { RemoteDesktopService, TunnelRestApiService, GuacamoleRemoteDesktopCompo
 })
 
 export class RemoteDesktopComponent implements OnInit, AfterViewInit {
-  @ViewChild('remoteDesktop', {static: false}) remoteDesktop: GuacamoleRemoteDesktopComponent;
+  @ViewChild('remoteDesktop', { static: false }) remoteDesktop: GuacamoleRemoteDesktopComponent;
 
   public fileManagerVisible: boolean = false;
 
 
   constructor(
-    public rdService: remoteDesktopService,
+    public rdService: RemoteDesktopService,
     public tunnelRestApiService: TunnelRestApiService,
   ) { }
 
@@ -136,17 +135,16 @@ export class RemoteDesktopComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    const tunnel = new WebSocketTunnel("ws://localhost:4567/websocket-tunnel");
-    this.tunnelRestApiService.initialize("http://localhost:4567");
-    this.rdService.initialize(tunnel);
-    this.connect();
-    this.rdService.onRemoteClipboardData.subscribe(text => {
-      const snackbar = this.snackBar.open("Received from remote clipboard", "OPEN CLIPBOARD", {
-        duration: 1500,
+   const socket = new Guacamole.SocketIOTunnel('', {
+        path: "{{your path}}",
+        transports: ['websocket'],
+        secure: true,
+        auth: {{your custom authentication/identification object}})
+        }
       });
-      snackbar.onAction().subscribe(() => this.handleClipboard());
-    });
-    this.rdService.onReconnect.subscribe(reconnect => this.connect());
+      this.remoteDesktopService.initialize(socket);
+      this.connect();
+      this.remoteDesktopService.onReconnect.subscribe(reconnect => this.connect());
   }
 
   ngAfterViewInit() {
@@ -157,61 +155,18 @@ export class RemoteDesktopComponent implements OnInit, AfterViewInit {
 
 
   connect() {
-    /**
-      * 2 Methods below.
-      *
-      * 1 is authentication handled at the gateway guacamole-gateway-ts and browser is agnostic
-      * to the connection parameters. This is useful if you have all the data at the gateway.
-      *
-      * 2 is simpler as you can see the connection parameters here. 
-      */
-
-    //Method 1
-    const auth = localStorage.getItem('auth-token');
-    const method1 = {
-      auth,                //Populating token from localstorage. Notice the token is NOT being put inside the token
-      something: "test",   //This is a custom field for the gateway to know where to direct this connection
-    };
-    // importing the "guac_params" interface will make it easier. 
-    var parameters: guac_params = { token: encrypt(method1) }
-
-    //Method 2
-    // importing the "guac_token_params" and "guac_params" interface will make it easier
-    const method2: guac_token_params = {
-      type: 'vnc',
-      settings: {
-        hostname: "192.168.1.1",
-        port: "59000",
-        "enable-sftp": true,
-        "sftp-hostname": "192.168.1.10",
-        "sftp-port": 2222,
-        "sftp-username": "testuser",
-        "sftp-password": "testuser"
-        }
-    }
-    var parameters: guac_params = { token: encrypt(method2) }
-
-    /**
-     * Optional, you can add unencrypted parameters in addition to the token. 
-     */
-    parameters = {
-      ...parameters,
-      "swap-red-blue": true
-    }
-
-    this.tunnelRestApiService.setToken(parameters.token);
-    this.rdService.connect(parameters);
+    //tell the gatway this is a client trying to connect
+     this.remoteDesktopService.connect({ type: 'client'});
     if (this.remoteDesktop) {
-      this.remoteDesktop.toolbarVisible = this.rdService.isConnected();
+      this.remoteDesktop.toolbarVisible = this.remoteDesktopService.isConnected();
     }
-}
+  }
  ```
 
  ## Associated Components
 
  [guacamole-gateway-ts](https://www.npmjs.com/package/guacamole-gateway-ts)
-
  [guacamole-common-ts](https://www.npmjs.com/package/guacamole-common-ts)
 
-[Apache Guacamole](https://guacamole.apache.org/)
+ [Apache Guacamole](https://guacamole.apache.org/)
  

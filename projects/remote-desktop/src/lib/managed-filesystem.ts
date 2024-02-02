@@ -1,5 +1,4 @@
-import { Client, Tunnel, Object } from "guacamole-common-ts";
-
+import { Client, Object, Tunnel } from "guacamole-common-ts";
 
 /**
  * Object which serves as a surrogate interface, encapsulating a Guacamole

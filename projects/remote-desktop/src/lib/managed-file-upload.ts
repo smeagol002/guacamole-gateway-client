@@ -1,5 +1,6 @@
 import { Status } from "guacamole-common-ts";
 
+
 /**
  * Object which serves as a surrogate interface, encapsulating a Guacamole
  * file upload while it is active, allowing it to be detached and
